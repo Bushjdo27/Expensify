@@ -12,3 +12,12 @@ body {
     line-height: 1.7;
     font-family: 'Roboto', sans-serif;
 }
+
+main {
+    padding: 5rem 4rem 0rem;
+    width: 120rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}

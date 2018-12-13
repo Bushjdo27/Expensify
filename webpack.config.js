@@ -5,16 +5,10 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-/*
-    ,vendor: VENDOR_LIBS
-
-            new webpack.optimize.CommonsChunkPlugin({
-                names: ['vendor' , 'manifest']
-            })
-*/
 module.exports = () => {
 
     //const VENDOR_LIBS = ['react' , 'react-dom' , 'redux' ,'redux-thunk' , 'react-router']
+    //MiniCssExtractPlugin.loader
     const env = process.env.NODE_ENV;
     const HtmlPlugin = new HtmlWebpackPlugin({
         template: './src/index.html'
@@ -24,7 +18,7 @@ module.exports = () => {
             bundle: './src/index.js'
         },
         output: {
-            filename: '[name].[chunkhash].js'
+            filename: 'bundle.js'
         },
         optimization: {
             minimizer: [
@@ -39,7 +33,8 @@ module.exports = () => {
         devServer: {
             contentBase: path.join(__dirname , 'dist'),
             port: 3000,
-            compress: true
+            compress: true,
+            historyApiFallback: true
         },
         devtool: env === 'production' ? 'source-map' : 'eval',
         mode: env === 'production' ? env : 'development',
