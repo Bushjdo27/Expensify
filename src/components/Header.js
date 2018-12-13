@@ -17,7 +17,7 @@ class Header extends Component{
                         </li>
                         <li className="header__navigation__item">
                             <NavLink className="header__navigation__item--link" to="/add" activeClassName="active-nav">
-                                Add
+                                Create
                             </NavLink>
                         </li>
                         <li className="header__navigation__item">

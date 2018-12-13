@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
-@import './base/_base.scss';
 @import './base/_variable.scss';
+@import './base/_base.scss';
+
 @import './utils/utils.scss';
 @import './components/_header.scss';
+@import './components/_inputBox.scss';
+@import './components/_button.scss';

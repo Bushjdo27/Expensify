@@ -4,3 +4,21 @@
     border-radius: .4rem;
     font-weight: bold;
 }
+
+.u--center {
+    margin: 0rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.u--medium{
+    margin: 4rem 0rem;
+}
+.bg-grey{
+    background-color: $color-border
+}
+.bg-white{
+    background-color: $color-white;
+}

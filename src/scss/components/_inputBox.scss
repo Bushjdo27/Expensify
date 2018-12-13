@@ -1,0 +1,62 @@
+
+.form{
+    padding: 5rem 0rem;
+    width: 50rem;
+    .input__box{
+        width: 100%;
+        height: 8rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem 0rem;
+        textarea{
+            width: 100%;
+            padding: 1rem;
+            border: .1rem solid $color-border;
+            transition: all .4s;
+            &:focus{
+                outline: none;
+                border: .1rem solid $color-red;
+            }
+        }
+        input{
+            outline: none;
+            width: 100%;
+            height: 5rem;
+            padding: 1.5rem 1rem 0rem;
+            border: .1rem solid $color-border;
+            font-size: 1.6rem;
+            &:focus{
+                outline: none;
+                border: none;
+                border-bottom: .1rem solid $color-red;
+            }
+            &:valid {
+                border: none;
+                border-bottom: .1rem solid $color-green;
+            }
+            &:focus ~ label, &:valid ~ label{
+                visibility: visible;
+                display: inline;
+                opacity: 1;
+                font-size: 1.2rem;
+                color: $color-green;
+                bottom: 5.4rem
+            }
+            &:focus ~ label{
+                color: $color-black;
+            }
+            
+        }
+        label{
+            position: absolute;
+            left: 1rem;
+            bottom: 2rem;
+            font-size: 1.5rem;
+            color: #a09e9e;
+            transition: all .2s;
+            z-index: 99;
+        }
+    }
+}

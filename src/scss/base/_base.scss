@@ -14,10 +14,15 @@ body {
 }
 
 main {
+    margin: 2rem 0rem;
     padding: 5rem 4rem 0rem;
+    border-radius: .7rem;
     width: 120rem;
+    background-color: $color-white;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
+
+    //box-shadow: 0 6px 12px rgba(0,0,0,.2);
 }
