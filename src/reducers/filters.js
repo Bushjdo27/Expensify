@@ -5,12 +5,12 @@ import {
     SORT_BY_AMOUNT,
     SORT_BY_DATE
 } from '../actions/CONSTANT'
-
+import moment from 'moment'
 const filterReducerDefault = {
     text: '',
     sortBy: 'date',
-    startDate: undefined,
-    endDate: undefined
+    startDate: moment().startOf('month'),
+    endDate: moment().endOf('month')
 }
 
 export default function(state = filterReducerDefault, action) {
