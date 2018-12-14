@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {addExpense} from '../actions/expenses'
-
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates'
+import 'react-dates/lib/css/_datepicker.css'; //import css for date picker
 class ExpenseForm extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            description: '',
-            amount: 1,
-            note: '',
-            createdAt: new Date().getTime()
+            description: props.expense ? props.expense.description : '',
+            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            note: props.expense ? props.expense.note : '',
+            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+            calendarFocused: false,
+            err: false
         }
     }
 
@@ -26,9 +29,16 @@ class ExpenseForm extends Component{
 
     onAmountChange = (e)=>{
         const amount = e.target.value;
-        if(amount.match(/^[1-9]\d*(.\d{0,2})?$/)){
+        if(!amount || amount.match(/^\d{1,}(.\d{0,2})?$/)){
             this.setState(() => ({amount}))
         }
+    }
+
+    onDateChange = (createdAt) => {
+        this.setState(()=>({createdAt}))
+    }
+    onFocusChange = ({focused}) =>{
+        this.setState(()=>({calendarFocused: focused}))
     }
 
     onNoteChange = (e)=>{
@@ -38,11 +48,33 @@ class ExpenseForm extends Component{
 
     onSubmit = (e)=>{
         e.preventDefault();
-        this.props.dispatch(addExpense({...this.state, id: 3}))
-        this.props.redirect('/')
+        const {description, amount, note,createdAt} = this.state;
+        if(description && amount){
+            if(this.props.edit){
+                this.props.onSubmit({
+                    description,
+                    amount: parseFloat(amount),
+                    note,
+                    createdAt: createdAt.valueOf()
+                })
+            }else{
+                this.props.onSubmit({
+                    id: "3",
+                    description,
+                    amount: parseFloat(amount),
+                    note,
+                    createdAt: createdAt.valueOf()
+                })
+            }
+            
+            
+        }else {
+            this.setState(()=>({err: true}))
+        }
+        
     }
     render(){
-        const {description , amount , note} = this.state;
+        const {description , amount , note, createdAt,calendarFocused,err} = this.state;
         return (
             <div>
                 <form className="form" onSubmit={this.onSubmit}>
@@ -61,12 +93,24 @@ class ExpenseForm extends Component{
                         <input 
                             onChange={this.onAmountChange} 
                             value={amount} 
-                            type="number" 
+                            type="text" 
                             id="amount" 
                             name="amount" 
                             required />
                         <label htmlFor="amount"> Amount</label>
                     </div>
+                    <div className="input__box">
+                        <SingleDatePicker 
+                            date={createdAt}
+                            onDateChange={this.onDateChange}
+                            focused={calendarFocused}
+                            onFocusChange={this.onFocusChange}
+                            numberOfMonths={1}
+                            isOutsideRange={()=>false}
+                        />
+                    </div>
+
+                    
 
                     <div className="input__box">
                         <textarea
@@ -79,7 +123,8 @@ class ExpenseForm extends Component{
                     </div>
 
                     <div className="u--center bg-white u--medium">
-                        <button className="btn btn--submit">Add</button>
+                        {err && <p>Please enter description, amount for your expense</p>}
+                        <button className="btn btn--submit">{this.props.edit ? 'Edit' : 'Add'}</button>
                     </div>
                     
                 </form>

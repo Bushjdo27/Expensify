@@ -18,8 +18,8 @@ export default function(state = [], action){
             ];
         case UPDATE_EXPENSE: 
             return state.map(expense => {
-                if(expense.id === action.expense.id){
-                    return action.expense
+                if(expense.id === action.id){
+                    return {...expense, ...action.expense}
                 }
                 return expense
             });

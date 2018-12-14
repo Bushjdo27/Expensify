@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ExpenseForm from '../components/ExpenseForm';
-
+import {connect} from 'react-redux';
+import {addExpense} from '../actions/expenses'
 
 class AddExpense extends Component {
     render() {
@@ -8,7 +9,12 @@ class AddExpense extends Component {
             <div className="u--center bg-grey">
                 <main>
                     <h1>Add Expense</h1>
-                    <ExpenseForm redirect={this.props.history.push}/>
+                    <ExpenseForm 
+                        onSubmit={(expense)=>{
+                            this.props.dispatch(addExpense(expense));
+                            this.props.history.push('/')
+                        }}
+                        redirect={this.props.history.push}/>
                 </main>
             </div>
         )
@@ -17,4 +23,4 @@ class AddExpense extends Component {
 }
 
 
-export default AddExpense;
+export default connect()(AddExpense);

@@ -22,6 +22,7 @@ export const addExpense = ({id,description, note, amount, createdAt }) => {
 }
 
 export const updateExpense = (id, update) => {
+    console.log(update)
     return {
         type: UPDATE_EXPENSE,
         id,

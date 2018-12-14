@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {deleteExpense} from '../actions/expenses'
+import { Link } from 'react-router-dom'
 
 const ExpenseItem = ({id, dispatch, description, amount}) => {
     return (
         <div>
-            <h3>{description}</h3>
+            <Link className="link-text" to={`/edit/${id}`}>
+                {description}
+            </Link>
             <p>
                 <strong>Amount: </strong> {amount}
             </p>

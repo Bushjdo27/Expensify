@@ -22,3 +22,23 @@
 .bg-white{
     background-color: $color-white;
 }
+
+.SingleDatePicker{
+    z-index: 999;
+}
+
+.link-text{
+    &,
+    &:visited,
+    &:active{
+        text-decoration: none;
+        color: $color-black;
+        font-size: 1.6rem;
+        transition: color .3s;
+    }
+
+    h3,&:hover{
+        color: $color-button-blue;
+
+    }
+}
