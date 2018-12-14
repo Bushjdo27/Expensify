@@ -6,7 +6,7 @@ import {
 } from './CONSTANT';
 
 
-export const addExpense = ({id,description, note, amount, createdAt }) => {
+export const addExpense = ({id='',description='', note='', amount=0, createdAt=0 }={}) => {
     return {
         type: ADD_EXPENSE,
         expense: {
@@ -22,7 +22,6 @@ export const addExpense = ({id,description, note, amount, createdAt }) => {
 }
 
 export const updateExpense = (id, update) => {
-    console.log(update)
     return {
         type: UPDATE_EXPENSE,
         id,
