@@ -5,7 +5,8 @@ import {
     SORT_BY_AMOUNT,
     SORT_BY_DATE
 } from '../actions/CONSTANT'
-import moment from 'moment'
+import moment from 'moment';
+
 const filterReducerDefault = {
     text: '',
     sortBy: 'date',
