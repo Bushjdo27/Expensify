@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Dashboard page 1`] = `
+<div
+  className="u--center"
+>
+  <main>
+    <Connect(ExpenseFilter) />
+    <h1>
+      Expense List
+    </h1>
+    <Connect(ExpensesListItem) />
+  </main>
+</div>
+`;

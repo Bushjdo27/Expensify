@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates'
-import 'react-dates/lib/css/_datepicker.css'; //import css for date picker
+
 class ExpenseForm extends Component{
 
     constructor(props){
         super(props);
         this.state = {
             description: props.expense ? props.expense.description : '',
-            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            amount: props.expense ? (props.expense.amount).toString() : '',
             note: props.expense ? props.expense.note : '',
             createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
             calendarFocused: false,
@@ -18,7 +18,6 @@ class ExpenseForm extends Component{
     }
 
     onDescriptionChange = (e)=>{
-        console.log('de')
         const description = e.target.value;
         this.setState(()=>{
             return {
@@ -50,6 +49,7 @@ class ExpenseForm extends Component{
         e.preventDefault();
         const {description, amount, note,createdAt} = this.state;
         if(description && amount){
+            this.setState(()=>({err: false}))
             if(this.props.edit){
                 this.props.onSubmit({
                     description,
@@ -134,4 +134,5 @@ class ExpenseForm extends Component{
 }
 
 
-export default connect()(ExpenseForm);
+//export default connect()(ExpenseForm);
+export default ExpenseForm;

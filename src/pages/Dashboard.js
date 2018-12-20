@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 import ExpensesListItem from '../components/ExpensesListItem';
-import selectExpenses from '../selector/expenses';
-import ExpenseFilter from '../components/ExpenseFilter'
+import ExpenseFilter from '../components/ExpenseFilter';
+
+
 class Dashboard extends Component {
     render() {
         return (
@@ -11,7 +11,7 @@ class Dashboard extends Component {
                 <main>
                     <ExpenseFilter />
                     <h1>Expense List</h1>
-                    <ExpensesListItem list={this.props.expenses}/>
+                    <ExpensesListItem />
                 </main>
             </div>
         )
@@ -19,10 +19,4 @@ class Dashboard extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        expenses: selectExpenses(state.expenses,state.filters)
-    }
-}
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

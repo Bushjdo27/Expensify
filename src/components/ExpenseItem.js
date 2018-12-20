@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {deleteExpense} from '../actions/expenses'
 import { Link } from 'react-router-dom'
 
-const ExpenseItem = ({id, dispatch, description, amount}) => {
+export const ExpenseItem = ({id, dispatch, description, amount}) => {
     return (
         <div>
             <Link className="link-text" to={`/edit/${id}`}>
