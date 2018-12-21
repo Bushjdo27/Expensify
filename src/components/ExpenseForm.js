@@ -52,6 +52,7 @@ class ExpenseForm extends Component{
             this.setState(()=>({err: false}))
             if(this.props.edit){
                 this.props.onSubmit({
+                    id: expense.id,
                     description,
                     amount: parseFloat(amount),
                     note,
