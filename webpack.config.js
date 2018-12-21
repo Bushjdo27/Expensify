@@ -5,11 +5,11 @@ const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = () => {
+module.exports = (env) => {
 
     //const VENDOR_LIBS = ['react' , 'react-dom' , 'redux' ,'redux-thunk' , 'react-router']
     //MiniCssExtractPlugin.loader
-    const env = process.env.NODE_ENV;
+    const isProduction = env === 'production';
     const HtmlPlugin = new HtmlWebpackPlugin({
         template: './src/index.html'
     })
@@ -36,8 +36,8 @@ module.exports = () => {
             compress: true,
             historyApiFallback: true
         },
-        devtool: env === 'production' ? 'source-map' : 'eval',
-        mode: env === 'production' ? env : 'development',
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        mode: isProduction ? isProduction : 'development',
         module: {
             rules: [
                 {
@@ -48,7 +48,19 @@ module.exports = () => {
                 {
                     test: /\.s?css/,
                     use: [
-                        MiniCssExtractPlugin.loader, "css-loader", "sass-loader"
+                        MiniCssExtractPlugin.loader, 
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        }
                     ]
                 },
                 {
