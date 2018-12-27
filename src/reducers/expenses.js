@@ -10,7 +10,7 @@ export default function(state = [], action){
 
     switch(action.type) {
         case ALL_EXPENSE: 
-            return state;
+            return action.expenses;
         case ADD_EXPENSE: 
             return [
                 ...state,
