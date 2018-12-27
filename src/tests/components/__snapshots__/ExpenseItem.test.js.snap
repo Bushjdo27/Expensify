@@ -7,14 +7,17 @@ exports[`should render expense item with data 1`] = `
     replace={false}
     to="/edit/1"
   >
-    Gum
+    <h3>
+      Gum
+    </h3>
   </Link>
   <p>
     <strong>
-      Amount: 
+      $195.00
+       
     </strong>
-     
-    195
+    -
+    January 1st, 1970
   </p>
   <button
     onClick={[Function]}

@@ -5,6 +5,9 @@ exports[`should render Expense List with empty message 1`] = `
   <p>
     No Expense
   </p>
+  <ExpensesSummary
+    expenses={Array []}
+  />
 </div>
 `;
 
@@ -33,6 +36,33 @@ exports[`should render expense list with item 1`] = `
     id="3"
     key="3"
     note=""
+  />
+  <ExpensesSummary
+    expenses={
+      Array [
+        Object {
+          "amount": 195,
+          "createdAt": 0,
+          "description": "Gum",
+          "id": "1",
+          "note": "",
+        },
+        Object {
+          "amount": 109500,
+          "createdAt": -345600000,
+          "description": "Rent",
+          "id": "2",
+          "note": "",
+        },
+        Object {
+          "amount": 4500,
+          "createdAt": 345600000,
+          "description": "Credit Card",
+          "id": "3",
+          "note": "",
+        },
+      ]
+    }
   />
 </div>
 `;

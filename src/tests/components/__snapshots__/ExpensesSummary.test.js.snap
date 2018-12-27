@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ExpensesSummary correctly 1`] = `
+<div>
+  <p>
+    Viewing : 
+    0
+  </p>
+  <p>
+    Totalling : 
+    $0.00
+  </p>
+</div>
+`;
+
+exports[`should render with expenses list 1`] = `
+<div>
+  <p>
+    Viewing : 
+    3
+  </p>
+  <p>
+    Totalling : 
+    $114,195.00
+  </p>
+</div>
+`;
+
+exports[`should render with no props expenses 1`] = `
+<div>
+  <p>
+    Viewing : 
+    0
+  </p>
+  <p>
+    Totalling : 
+    $0.00
+  </p>
+</div>
+`;
