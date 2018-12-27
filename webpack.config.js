@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack')
 const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
@@ -10,14 +10,15 @@ module.exports = (env) => {
     //const VENDOR_LIBS = ['react' , 'react-dom' , 'redux' ,'redux-thunk' , 'react-router']
     //MiniCssExtractPlugin.loader
     const isProduction = env === 'production';
-    const HtmlPlugin = new HtmlWebpackPlugin({
-        template: './src/index.html'
-    })
+    // const HtmlPlugin = new HtmlWebpackPlugin({
+    //     template: './public/index.html'
+    // })
     return {
         entry: {
             bundle: './src/index.js'
         },
         output: {
+            path: path.join(__dirname, 'public', 'dist') ,
             filename: 'bundle.js'
         },
         optimization: {
@@ -31,10 +32,11 @@ module.exports = (env) => {
             ]
         },
         devServer: {
-            contentBase: path.join(__dirname , 'dist'),
+            contentBase: path.join(__dirname , 'public'),
             port: 3000,
             compress: true,
-            historyApiFallback: true
+            historyApiFallback: true,
+            publicPath: '/dist/'
         },
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         mode: isProduction ? isProduction : 'development',
@@ -78,7 +80,6 @@ module.exports = (env) => {
         },
         plugins: [
             new MiniCssExtractPlugin(),
-            HtmlPlugin,
         ]
     }
 }

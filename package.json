@@ -24,7 +24,9 @@
     "enzyme-adapter-react-16": "1.0.0",
     "raf": "3.3.2",
     "jest": "23.6.0",
-    "webpack-dev-server": "3.1.10"
+    "webpack-dev-server": "3.1.10",
+    "react-addons-shallow-compare": "15.6.2",
+    "react-test-renderer": "16.0.0"
   },
   "dependencies": {
     "@babel/core": "7.2.0",
@@ -44,12 +46,10 @@
     "node-sass": "4.11.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "react": "16.6.3",
-    "react-addons-shallow-compare": "15.6.2",
     "react-dates": "12.7.0",
     "react-dom": "16.6.3",
     "react-redux": "6.0.0",
     "react-router-dom": "4.2.2",
-    "react-test-renderer": "16.0.0",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
     "sass-loader": "7.1.0",
