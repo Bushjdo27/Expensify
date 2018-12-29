@@ -22,8 +22,7 @@ exports[`Should handle render Header correctly 1`] = `
           activeClassName="active-nav"
           ariaCurrent="true"
           className="header__navigation__item--link"
-          exact={true}
-          to="/"
+          to="/dashboard"
         >
           Dashboard
         </NavLink>
@@ -39,6 +38,16 @@ exports[`Should handle render Header correctly 1`] = `
         >
           Create
         </NavLink>
+      </li>
+      <li
+        className="header__navigation__item"
+      >
+        <button
+          className="header__navigation__item--link"
+          onClick={[Function]}
+        >
+          Log Out
+        </button>
       </li>
     </ul>
   </nav>

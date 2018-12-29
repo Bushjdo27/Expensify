@@ -1,7 +1,13 @@
 import React , {Component} from 'react';
 import { NavLink} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { startLogOut } from '../actions/auth';
 
-class Header extends Component{
+export class Header extends Component{
+
+    handleSignOut = ()=>{
+        this.props.startLogOut()
+    }
     render() {
         return (
             <header className="header">
@@ -11,14 +17,19 @@ class Header extends Component{
                 <nav>
                     <ul className="header__navigation">
                         <li className="header__navigation__item">
-                            <NavLink className="header__navigation__item--link" exact={true} to="/" activeClassName="active-nav">
+                            <NavLink className="header__navigation__item--link" to="/dashboard" activeClassName="active-nav">
                                 Dashboard
                             </NavLink>
                         </li>
                         <li className="header__navigation__item">
-                            <NavLink className="header__navigation__item--link" to="/add" activeClassName="active-nav">
+                            <NavLink className="header__navigation__item--link" to="/create" activeClassName="active-nav">
                                 Create
                             </NavLink>
+                        </li>
+                        <li className="header__navigation__item">
+                            <button onClick={this.handleSignOut} className="header__navigation__item--link">
+                                Log Out
+                            </button>
                         </li>
                         
                     </ul>
@@ -28,4 +39,10 @@ class Header extends Component{
     }
 }
 
-export default Header;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        startLogOut: () => dispatch(startLogOut())
+    }
+}
+
+export default connect(undefined, mapDispatchToProps)(Header);
