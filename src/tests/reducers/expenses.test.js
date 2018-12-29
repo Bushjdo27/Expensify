@@ -9,6 +9,12 @@ test('should set default value', ()=>{
     expect(state).toEqual([]);
 });
 
+test('should get all expenses', ()=>{
+    const state = expensesReducer([], {type: ALL_EXPENSE, expenses});
+    expect(state.length).toBe(3);
+    expect(state).toEqual(expenses);
+})
+
 test('should add expense', ()=>{
     const expense = {
         id: '4',

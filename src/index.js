@@ -5,33 +5,21 @@ import AppRoute from './route/AppRoute';
 import configureStore from './store/configureStore'
 import './scss/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'; //import css for date picker
-import {allExpense} from './actions/expenses';
+import {startSetExpense} from './actions/expenses';
 //import './firebase/101/firebase'
 const store = configureStore();
-// const expense = {
-//     id: '1',
-//     description: 'This bill for water',
-//     note: 'this is bill for invite new friends',
-//     amount: 200,
-//     createdAt: new Date().getTime()
-// }
-// const expense2 = {
-//     id: '2',
-//     description: 'This bill for gas',
-//     note: 'this is bill for buy new gas',
-//     amount: 100,
-//     createdAt: new Date().getTime()
-// }
 
-
-store.dispatch(allExpense());
-
-// setTimeout(() => {
-//     store.dispatch(setTextFilter('gas'))
-// },3000)
-
-ReactDOM.render(
+const jsx = (
     <Provider store={store}>
         <AppRoute />
-    </Provider>, 
+    </Provider>
+)
+ReactDOM.render(
+    <p>Loading...</p>, 
     document.getElementById("root"))
+
+store.dispatch(startSetExpense()).then(()=>{
+    ReactDOM.render(
+        jsx, 
+        document.getElementById("root"))
+})

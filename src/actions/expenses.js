@@ -6,9 +6,16 @@ import {
 } from './CONSTANT';
 import database from '../firebase/firebase'
 
-export const allExpense = ()=>{
+export const allExpense = (expenses) => {
+    return {
+        type: ALL_EXPENSE,
+        expenses
+    }
+}
+
+export const startSetExpense = ()=>{
     return (dispatch) =>{
-        database.ref('expenses')
+        return database.ref('expenses')
             .once('value')
             .then(snapshot => {
                 const expenses = [];
@@ -19,7 +26,7 @@ export const allExpense = ()=>{
                         ...childSnapshot.val()
                     })
                 });
-                dispatch({type: ALL_EXPENSE, expenses})
+                dispatch(allExpense(expenses))
             })
     }
 }
@@ -51,10 +58,25 @@ export const updateExpense = (id, update) => {
     }
 }
 
+export const startUpdateExpense = (id, update)=>{
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).update(update).then(()=>{
+                    dispatch(updateExpense(id, update))
+                })
+    }
+}
+
 export const deleteExpense = (id) => {
     return {
         type: DELETE_EXPENSE,
         id
-
+        
+    }
+}
+export const startDeleteExpense = (id) => {
+    return (dispatch) => {
+        return database.ref(`expenses/${id}`).remove().then(()=>{
+            dispatch(deleteExpense(id))
+        })
     }
 }
