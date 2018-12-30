@@ -14,18 +14,9 @@ if(process.env.NODE_ENV === 'test'){
 }
 
 module.exports = (env) => {
-
-    //const VENDOR_LIBS = ['react' , 'react-dom' , 'redux' ,'redux-thunk' , 'react-router']
-    //MiniCssExtractPlugin.loader
     const isProduction = env === 'production';
-    // const HtmlPlugin = new HtmlWebpackPlugin({
-    //     template: './public/index.html'
-    // })
-
     return {
-        entry: {
-            bundle: './src/index.js'
-        },
+        entry: ["@babel/polyfill", "./src/index.js"],
         output: {
             path: path.join(__dirname, 'public', 'dist') ,
             filename: 'bundle.js'
