@@ -5,6 +5,8 @@ import {ALL_EXPENSE , ADD_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE} from '../../a
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
+const uid = 'thisismytestuid';
+const defaultAuthState = {auth: { uid }}
 const createMockStore = configureMockStore([Thunk]);
 const expense = {
     id: '1',
@@ -19,7 +21,7 @@ beforeEach((done)=>{
     expenses.forEach(({id, description, note, amount, createdAt}) => {
         expenseData[id] = {description, note, amount, createdAt}
     })
-    database.ref('expenses').set(expenseData).then(()=>{
+    database.ref(`users/${uid}/expenses`).set(expenseData).then(()=>{
         done();
     })
 })
@@ -32,8 +34,8 @@ test('should get all expense correctly', ()=>{
     })
 })
 
-test('should get expenses from database correctly', ()=>{
-    const store = createMockStore({});
+test('should get expenses from database correctly', (done)=>{
+    const store = createMockStore(defaultAuthState);
 
     store.dispatch(startSetExpense()).then(()=>{
         const actions = store.getActions();
@@ -41,6 +43,7 @@ test('should get expenses from database correctly', ()=>{
             type: ALL_EXPENSE,
             expenses
         })
+        done()
     })
 })
 
@@ -53,7 +56,7 @@ test(' should add expense action with provide value', ()=>{
 })
 
 test('should add expense to database and store', (done)=>{
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const expenseData = {
         description: 'This bill for water, testing case',
         note: 'this is bill for invite new friends',
@@ -69,7 +72,7 @@ test('should add expense to database and store', (done)=>{
                 ...expenseData
             }
         })
-      return database.ref(`expenses/${actions[0].expense.id}`).once('value');  
+      return database.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');  
     }).then(snapshot => {
         expect(snapshot.val()).toEqual(expenseData);
         done(); // tell jest -> the test is complete, if we do not call this function -> jest will wait
@@ -77,7 +80,7 @@ test('should add expense to database and store', (done)=>{
 });
 
 test('should add expense with default value to database and store', (done)=>{
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const defaultValue = {
         description:'',
         note:'',
@@ -93,7 +96,7 @@ test('should add expense with default value to database and store', (done)=>{
                 ...defaultValue
             }
         })
-        return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${actions[0].expense.id}`).once('value');
 
     }).then((snapshot)=>{
         expect(snapshot.val()).toEqual(defaultValue);
@@ -112,7 +115,7 @@ test('should update expense action', ()=>{
 })
 
 test('should update expense at firebase',(done)=>{
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const id = expenses[0].id;
     const update = {
         description: 'Updated for test case'
@@ -124,7 +127,7 @@ test('should update expense at firebase',(done)=>{
             id: id,
             expense:update
         })
-        return database.ref(`expenses/${id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${id}`).once('value');
     }).then(snapshot => {
         expect(snapshot.val().description).toBe(update.description);
         done();
@@ -140,7 +143,7 @@ test('should delete expense action', ()=>{
 })
 
 test('should delete expense from firebase', (done)=>{
-    const store = createMockStore({});
+    const store = createMockStore(defaultAuthState);
     const id = expenses[0].id;
     store.dispatch(startDeleteExpense(id)).then(()=>{
         const actions = store.getActions();
@@ -149,7 +152,7 @@ test('should delete expense from firebase', (done)=>{
             type: DELETE_EXPENSE,
             id: id
         })
-        return database.ref(`expenses/${id}`).once('value')
+        return database.ref(`users/${uid}/expenses/${id}`).once('value')
     }).then((snapshot)=>{
         expect(snapshot.val()).toBeFalsy();
         done()

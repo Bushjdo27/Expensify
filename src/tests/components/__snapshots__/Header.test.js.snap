@@ -34,7 +34,7 @@ exports[`Should handle render Header correctly 1`] = `
           activeClassName="active-nav"
           ariaCurrent="true"
           className="header__navigation__item--link"
-          to="/add"
+          to="/create"
         >
           Create
         </NavLink>
